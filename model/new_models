@@ -1,0 +1,11 @@
+CREATE TABLE notifications (
+    id int(11) AUTO_INCREMENT,
+    notification_type int(11) NOT NULL,
+    notification_text TEXT NOT NULL,
+    notification_date DATE NOT NULL,
+    last_date DATE NOT NULL,
+    published enum('0', '1') DEFAULT('0'),
+    active enum('0', '1') DEFAULT('0'),
+    PRIMARY KEY (id),
+    FOREIGN KEY (notification_type) REFERENCES feetp (id)
+)

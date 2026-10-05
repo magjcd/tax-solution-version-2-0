@@ -1,0 +1,26 @@
+name: TALREJA Consultant CI/CD
+
+on:
+  push: 
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+steps:
+  - name: Check Code
+    uses: actions/checkout@v4
+
+  - name: Setup PHP
+    uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.4'
+  
+  - name: Deploy via FTP
+    uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.FTP_SERVER_TALREJA }}
+        username: ${{ secrets.USERNAME_TALREJA }}
+        password: ${{ secrets.PASSWORD_TALREJA }}
+        server-dir: '/public_html/app.talrejaconsultant.com/'
