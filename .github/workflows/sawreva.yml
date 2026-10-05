@@ -8,19 +8,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-steps:
-  - name: Check Code
-    uses: actions/checkout@v4
+    steps:
+      - name: Check Code
+        uses: actions/checkout@v4
 
-  - name: Setup PHP
-    uses: shivammathur/setup-php@v2
-    with:
-      php-version: '8.4'
-  
-  - name: Deploy via FTP
-    uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-    with:
-      server: ${{ secrets.FTP_SERVER_SAWREVA }}
-      username: ${{ secrets.USERNAME_SAWREVA }}
-      password: ${{ secrets.PASSWORD_SAWREVA }}
-      server-dir: '/public_html/app.sawrevataxsolution.com/'
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+      
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER_SAWREVA }}
+          username: ${{ secrets.USERNAME_SAWREVA }}
+          password: ${{ secrets.PASSWORD_SAWREVA }}
+          server-dir: '/public_html/app.sawrevataxsolution.com/'
