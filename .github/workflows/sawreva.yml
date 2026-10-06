@@ -23,4 +23,4 @@ jobs:
           server: ${{ secrets.FTP_SERVER_SAWREVA }}
           username: ${{ secrets.USERNAME_SAWREVA }}
           password: ${{ secrets.PASSWORD_SAWREVA }}
-          server-dir: '/public_html/staging.sawrevataxsolution.com/'
+          server-dir: '/'
