@@ -23,4 +23,4 @@ jobs:
           server: ${{ secrets.FTP_SERVER_TALREJA }}
           username: ${{ secrets.USERNAME_TALREJA }}
           password: ${{ secrets.PASSWORD_TALREJA }}
-          server-dir: '/public_html/app.talrejaconsultant.com/'
+          server-dir: '/public_html/staging.talrejaconsultant.com/'

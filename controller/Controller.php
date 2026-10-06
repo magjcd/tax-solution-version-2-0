@@ -4372,13 +4372,32 @@ ACCOUNTS RELATED AREA
 			$getNoClFiled1 = $this->model->emptyCmd('DROP TABLE ledgertmp');
 			$getNoClFiled2 = $this->model->emptyCmd('CREATE TABLE ledgertmp SELECT * FROM ledger LIMIT 0');
 			$getNoClFiled3 = $this->model->emptyCmd('INSERT INTO ledgertmp SELECT * FROM ledger WHERE retGj = "retTrk" AND feeTp = "IncomeTax" AND feeYr = ' . $txYr);
-			$getNoClFiled = $this->model->emptyCmd('SELECT COUNT(client.id) as NoCases,COUNT(ledgertmp.clientId) as NoLedCases,client.boNm,client.boNm FROM `client` LEFT JOIN `ledgertmp` ON client.id=ledgertmp.clientId WHERE client.sHdNm = "Accounts Receivable" GROUP BY client.boNm ORDER BY client.boNm');
+			// $get_no_cl_filed_prev_year = $this->model->emptyCmd('INSERT INTO ledgertmp SELECT * FROM ledger WHERE retGj = "retTrk" AND feeTp = "IncomeTax" AND feeYr = ' . ($txYr-1));
+			$getNoClFiled = $this->model->emptyCmd('SELECT COUNT(client.id) as NoCases,COUNT(ledgertmp.clientId) as NoLedCases,client.boNm,client.boNm FROM `client` LEFT JOIN `ledgertmp` ON client.id=ledgertmp.clientId WHERE client.sHdNm = "Accounts Receivable" GROUP BY client.boId ORDER BY client.boNm');
 		}else{
 			$getNoClFiled1 = $this->model->emptyCmd('DROP TABLE ledgertmp');
 			$getNoClFiled2 = $this->model->emptyCmd('CREATE TABLE ledgertmp SELECT * FROM ledger LIMIT 0');
 			$getNoClFiled3 = $this->model->emptyCmd('INSERT INTO ledgertmp SELECT * FROM ledger WHERE retGj = "retTrk" AND feeTp = "IncomeTax" AND feeYr = ' . $txYr);
 			$getNoClFiled = $this->model->emptyCmd('SELECT COUNT(client.id) as NoCases,COUNT(ledgertmp.clientId) as NoLedCases,client.cityNm,client.boNm FROM `client` LEFT JOIN `ledgertmp` ON client.id=ledgertmp.clientId WHERE client.sHdNm = "Accounts Receivable" GROUP BY client.cityNm ORDER BY client.cityNm');
 		}
+
+		if ($getNoClFiled->num_rows > 0) {
+			while ($row = $getNoClFiled->fetch_assoc()) {
+				$data[] = $row;
+			}
+			return $data;
+		}
+	}
+
+	// Previous Year Data for Client Filed, It is associated with above noClFiled function
+	public function noClFiledPrevYear($txYr)
+	{
+		$getNoClFiled = null;
+		$data = null;
+			$getNoClFiled1 = $this->model->emptyCmd('DROP TABLE ledgertmp');
+			$getNoClFiled2 = $this->model->emptyCmd('CREATE TABLE ledgertmp SELECT * FROM ledger LIMIT 0');
+			$get_no_cl_filed_prev_year = $this->model->emptyCmd('INSERT INTO ledgertmp SELECT * FROM ledger WHERE retGj = "retTrk" AND feeTp = "IncomeTax" AND feeYr = ' . ($txYr-1));
+			$getNoClFiled = $this->model->emptyCmd('SELECT COUNT(client.id) as NoCases,COUNT(ledgertmp.clientId) as NoLedCases,client.boNm,client.boNm FROM `client` LEFT JOIN `ledgertmp` ON client.id=ledgertmp.clientId WHERE client.sHdNm = "Accounts Receivable" GROUP BY client.boId ORDER BY client.boNm');
 
 		if ($getNoClFiled->num_rows > 0) {
 			while ($row = $getNoClFiled->fetch_assoc()) {
