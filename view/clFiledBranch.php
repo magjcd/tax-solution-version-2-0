@@ -46,7 +46,7 @@
 								$noClFiled = $ContObj->noClFiled($_POST['taxYr'], $branch = 'yes');
 								
 								$html = '<table class="table table-striped">
-								<tr><td colspan="5" style="text-align: center;"></td><td><a href="view/clFiledPdf.php?taxYr=' . $_POST['taxYr'] . '"><i class="fa fa-file-pdf fa-lg fa-fw"></i></a></td></tr>
+								<tr><td colspan="5" style="text-align: center;"></td><td><a href="view/clFiledBranchPDF.php?taxYr=' . $_POST['taxYr'] . '"><i class="fa fa-file-pdf fa-lg fa-fw"></i></a></td></tr>
 								<tr><td colspan="6" style="text-align: center; background-color: #000; color: goldenrod"><h3>Current Year ' . $_POST['taxYr'] . '</h3></td></tr>
 								<tr>
 								<th>Branch Name</th>
@@ -87,14 +87,15 @@
 
 								</tr>';
 								$html .= '</table>';
-
 								echo $html;
 
+								// ==============================
 								// Previous Year
+								// ==============================
+
 								$noClFiledPrevYear = $ContObj->noClFiledPrevYear($_POST['taxYr']);
-								
 								$html_prev_year = '<table class="table table-striped">
-								<tr><td colspan="5" style="text-align: center;"></td><td><a href="view/clFiledPdf.php?taxYr=' . $_POST['taxYr'] . '"><i class="fa fa-file-pdf fa-lg fa-fw"></i></a></td></tr>
+								<tr><td colspan="5" style="text-align: center;"></td><td></td></tr>
 								<tr><td colspan="6" style="text-align: center; background-color: #000; color: goldenrod;"><h3>Previous Year ' . ($_POST['taxYr'] - 1) . '</h3></td></tr>
 								<tr>
 								<th>Branch Name</th>
@@ -132,10 +133,8 @@
 								<th>'.$tot_filed_no.'</th>
 								<th>&nbsp;</th>
 								<th>'.$tot_remaining_no.'</th>
-
 								</tr>';
 								$html_prev_year .= '</table>';
-
 								echo $html_prev_year;
 							}
 

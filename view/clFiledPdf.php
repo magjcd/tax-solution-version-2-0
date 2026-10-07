@@ -1,4 +1,5 @@
 <?php
+try{
 include('../autoLoad.php');
 $ContObj = new Controller();
 //$noClFiled = $ContObj->noClFiled();
@@ -33,15 +34,29 @@ foreach($noClFiled as $noClFiledDet){
 	<td style="text-align: right; font-size: 10px;">'.number_format($rem,2).'%</td></tr>';
 }
 $html .= '</table>';
-	$html .= "<hr /><p style='line-height: 50px; text-align: center; font-size: 9px;font-family: Josefin Sans, sans-Serif; background: orange; color: #000;'>Copy Right &copy;".date('Y')."-2021 - Design & Developed by magTech | +92 333 244 5283</p>";
+	$html .= "<hr /><p style='line-height: 50px; text-align: center; font-size: 9px;font-family: Josefin Sans, sans-Serif; background: orange; color: #000;'>Copy Right &copy;".date('Y')."-2021 - Design & Developed by magTech | +92 315 317 0285</p>";
 //echo $html;
 include('vendor/autoload.php');
-$mpdf = new \Mpdf\Mpdf();
+$custom_tmp_dir = __DIR__ . '/tmp';
+// Create the folder automatically if it doesn't exist
+if (!is_dir($custom_tmp_dir)) {
+    mkdir($custom_tmp_dir, 0777, true);
+}
+$mpdf = new \Mpdf\Mpdf([
+    'tempDir' => $custom_tmp_dir
+]);
 $mpdf->debug = true;
 $mpdf->WriteHTML($html);
 //$file = './pdf/'.$userNm.' '.date('d_m_Y_h_i_s_A').'.pdf';
 $file = 'RFS_'.date('d_m_Y_h_i_s_A').'.pdf';
-ob_clean();
+// ob_clean();
 $mpdf->Output($file,'D');	
-//header('location: index?page=DWvRetTrk');
+} catch (\Mpdf\MpdfException $e) {
+    echo "mPDF Exception caught: " . $e->getMessage();
+} catch (\Error $e) {
+    echo "PHP Fatal Error caught: " . $e->getMessage();
+} catch (\Exception $e) {
+    echo "General Exception caught: " . $e->getMessage();
+}
+// header('location: index?page=DWvRetTrk');
 ?>
