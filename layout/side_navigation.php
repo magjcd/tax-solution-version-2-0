@@ -111,7 +111,7 @@ if (isset($_SESSION['taxmagadmin'])) {
             <a href="index?page=ledgerToExcel">
               <i class="bi bi-circle main-text-color"></i><span class="main-text-color">Ledger's Excel File</span>
             </a>
-            <a href="index?page=clFiledBranch"> // Branch Wise
+            <a href="index?page=clFiledBranch">
               <i class="bi bi-circle main-text-color"></i><span class="main-text-color">RetTrk Filing Status Branch Wise</span>
             </a>
             <a href="index?page=clFiled">

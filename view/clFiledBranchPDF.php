@@ -8,7 +8,7 @@ try{
 		$noClFiled = $ContObj->noClFiled($_GET['taxYr'], $branch = 'yes');
 		
 		$html = "<div style='width: 100%;font-family: Josefin Sans, sans-Serif;'>
-			<span style='font-size: 18px; font-weight: bold;'>SAWREVA</span><br />
+			<span style='font-size: 18px; font-weight: bold;'>".$firm_name = $ContObj->FirmDetails()."</span><br />
 			<span style='font-size: 10px;'>Tax Solution</span>";
 
 		$html .= '<table style="width: 100%;font-family: Josefin Sans, sans-Serif;">
